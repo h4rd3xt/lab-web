@@ -1,32 +1,35 @@
-/*
- * page.tsx en la raíz de /app = la página de inicio (ruta "/").
- *
- * Esto es un SERVER COMPONENT (el modo por defecto en el App Router):
- * se renderiza en el servidor y llega al navegador como HTML.
- * Cuando necesitemos interactividad (formularios, useState...)
- * crearemos componentes con "use client" encima.
- */
+import React from "react";
 
-// Datos tipados con TypeScript: un array de objetos con forma fija
+// Provide a minimal JSX.IntrinsicElements declaration to satisfy TS when
+// project-level JSX typings are not available in this environment.
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+import Link from "next/link";
+
 type Departamento = {
   numero: number;
   nombre: string;
   tecnologia: string;
   estado: "funcionando" | "pendiente";
+  href?: string;
 };
 
 const departamentos: Departamento[] = [
   { numero: 1, nombre: "Entorno de desarrollo", tecnologia: "VSCode + Git/GitHub", estado: "funcionando" },
   { numero: 2, nombre: "Frontend", tecnologia: "Next.js + React + Tailwind", estado: "funcionando" },
   { numero: 3, nombre: "Infraestructura", tecnologia: "Vercel", estado: "pendiente" },
-  { numero: 4, nombre: "Backend y datos", tecnologia: "Supabase", estado: "pendiente" },
+  { numero: 4, nombre: "Backend y datos", tecnologia: "Supabase", estado: "funcionando", href: "/contacto" },
   { numero: 5, nombre: "Comunicaciones", tecnologia: "Resend", estado: "pendiente" },
 ];
 
 export default function Home() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-20">
-      {/* Cabecera */}
       <p className="font-mono text-sm tracking-widest text-brand uppercase">
         // laboratorio-web
       </p>
@@ -34,41 +37,49 @@ export default function Home() {
         El stack está vivo
       </h1>
       <p className="mt-4 text-lg text-ink-soft">
-        Si lees esto en <span className="text-brand">localhost:3000</span>,
-        los departamentos 1 y 2 ya funcionan. Iremos encendiendo el resto.
+        Los departamentos 1, 2 y 4 ya funcionan. Iremos encendiendo el resto.
       </p>
 
-      {/* Lista renderizada con .map() — patrón fundamental de React.
-          La prop "key" ayuda a React a identificar cada elemento. */}
+      {/* Lista renderizada con .map(). Los deptos con href son clicables. */}
       <ul className="mt-12 space-y-3">
-        {departamentos.map((depto) => (
-          <li
-            key={depto.numero}
-            className="flex items-center gap-4 rounded-xl border border-line bg-surface-soft p-4"
-          >
-            <span className="grid h-10 w-10 place-items-center rounded-lg border border-line font-mono text-brand">
-              {depto.numero}
-            </span>
-            <div className="flex-1">
-              <p className="font-semibold">{depto.nombre}</p>
-              <p className="font-mono text-sm text-ink-dim">{depto.tecnologia}</p>
+        {departamentos.map((depto) => {
+          const card = (
+            <div className="flex items-center gap-4 rounded-xl border border-line bg-surface-soft p-4">
+              <span className="grid h-10 w-10 place-items-center rounded-lg border border-line font-mono text-brand">
+                {depto.numero}
+              </span>
+              <div className="flex-1">
+                <p className="font-semibold">{depto.nombre}</p>
+                <p className="font-mono text-sm text-ink-dim">{depto.tecnologia}</p>
+              </div>
+              <span
+                className={
+                  depto.estado === "funcionando"
+                    ? "rounded-full bg-brand/10 px-3 py-1 font-mono text-xs text-brand"
+                    : "rounded-full border border-line px-3 py-1 font-mono text-xs text-ink-dim"
+                }
+              >
+                {depto.estado === "funcionando" ? "✓ funcionando" : "pendiente"}
+              </span>
             </div>
-            {/* Renderizado condicional: la clase cambia según los datos */}
-            <span
-              className={
-                depto.estado === "funcionando"
-                  ? "rounded-full bg-brand/10 px-3 py-1 font-mono text-xs text-brand"
-                  : "rounded-full border border-line px-3 py-1 font-mono text-xs text-ink-dim"
-              }
-            >
-              {depto.estado === "funcionando" ? "✓ funcionando" : "pendiente"}
-            </span>
-          </li>
-        ))}
+          );
+
+          return (
+            <li key={depto.numero}>
+              {depto.href ? (
+                <Link href={depto.href} className="block hover:opacity-80">
+                  {card}
+                </Link>
+              ) : (
+                card
+              )}
+            </li>
+          );
+        })}
       </ul>
 
       <footer className="mt-16 border-t border-line pt-6 font-mono text-sm text-ink-dim">
-        Siguiente parada: subir esto a GitHub y desplegarlo en Vercel.
+        Siguiente parada: emails de confirmación con Resend.
       </footer>
     </main>
   );
