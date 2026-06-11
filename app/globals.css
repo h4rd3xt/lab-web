@@ -10,7 +10,7 @@
  * Paleta tomada del documento de arquitectura.
  */
 @theme {
-  --color-surface: #0c1018; /* fondo principal */
+  --color-surface: #0c1017; /* fondo principal */
   --color-surface-soft: #121826; /* fondo de paneles */
   --color-line: #243049; /* bordes */
   --color-ink: #e8edf6; /* texto principal */

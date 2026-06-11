@@ -1,4 +1,5 @@
 import React from "react";
+import FormularioSolicitud from "@/components/FormularioSolicitud";
 
 // Provide a minimal JSX.IntrinsicElements declaration to satisfy TS when
 // project-level JSX typings are not available in this environment.
@@ -77,6 +78,8 @@ export default function Home() {
           );
         })}
       </ul>
+
+      <FormularioSolicitud />
 
       <footer className="mt-16 border-t border-line pt-6 font-mono text-sm text-ink-dim">
         Siguiente parada: emails de confirmación con Resend.
