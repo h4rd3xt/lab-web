@@ -1,7 +1,6 @@
 "use client"; // frontera: este componente SÍ viaja al navegador y cobra vida
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 
 export default function FormularioSolicitud() {
   // Inputs "controlados": React es el dueño del valor de cada campo
@@ -10,17 +9,16 @@ export default function FormularioSolicitud() {
   const [mensaje, setMensaje] = useState("");
   const [estado, setEstado] = useState<"inicial" | "enviando" | "exito" | "error">("inicial");
 
-  async function enviar(e: React.FormEvent) {
+  async function enviar(e: React.SubmitEvent) {
     e.preventDefault(); // sin esto, el navegador recargaría la página
     setEstado("enviando");
+    const res = await fetch("/api/solicitudes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nombre, email, mensaje }),
+    });
 
-    // INSERT en PostgreSQL vía la API automática (PostgREST) + RLS
-    const { error } = await supabase
-      .from("solicitudes")
-      .insert({ nombre, email, mensaje });
-
-    if (error) {
-      console.error(error);
+    if (!res.ok) {
       setEstado("error");
     } else {
       setEstado("exito");
