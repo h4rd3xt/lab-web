@@ -35,6 +35,7 @@ export default function Home() {
       </p>
       <h1 className="mt-3 text-4xl font-bold tracking-tight">
         El stack está vivo
+        Test CD
       </h1>
       <p className="mt-4 text-lg text-ink-soft">
         Los departamentos 1, 2 y 4 ya funcionan. Iremos encendiendo el resto.
