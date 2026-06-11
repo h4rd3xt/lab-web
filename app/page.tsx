@@ -23,7 +23,7 @@ type Departamento = {
 const departamentos: Departamento[] = [
   { numero: 1, nombre: "Entorno de desarrollo", tecnologia: "VSCode + Git/GitHub", estado: "funcionando" },
   { numero: 2, nombre: "Frontend", tecnologia: "Next.js + React + Tailwind", estado: "funcionando" },
-  { numero: 3, nombre: "Infraestructura", tecnologia: "Vercel", estado: "pendiente" },
+  { numero: 3, nombre: "Infraestructura", tecnologia: "Vercel", estado: "funcionando" },
   { numero: 4, nombre: "Backend y datos", tecnologia: "Supabase", estado: "funcionando", href: "/contacto" },
   { numero: 5, nombre: "Comunicaciones", tecnologia: "Resend", estado: "pendiente" },
 ];
