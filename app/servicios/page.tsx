@@ -4,7 +4,7 @@ import Link from "next/link";
 import { servicios } from "@/lib/servicios";
 
 export const metadata: Metadata = {
-  title: "Servicios · Laboratorio Web",
+  title: "Servicios",
   description: "Automatización, gestión de datos y modernización web.",
 };
 
@@ -14,10 +14,10 @@ export default function PaginaServicios() {
       <p className="font-mono text-sm tracking-widest text-brand uppercase">
         servicios
       </p>
-      <h1 className="mt-3 text-4xl font-bold tracking-tight">
+      <h1 className="mt-3 text-4xl font-bold tracking-tight text-balance">
         Qué podemos hacer por ti
       </h1>
-      <p className="mt-4 max-w-xl text-lg text-ink-soft">
+      <p className="mt-4 max-w-xl text-lg text-ink-soft text-pretty">
         Tres líneas de trabajo, una misma idea: que la tecnología te quite
         tareas, no que te las añada.
       </p>

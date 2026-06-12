@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacidad · Laboratorio Web",
+  title: "Privacidad",
   description: "Cómo tratamos tus datos personales.",
 };
 

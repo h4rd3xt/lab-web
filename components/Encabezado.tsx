@@ -11,12 +11,12 @@ export default function Encabezado() {
           laboratorio<span className="text-brand">-web</span>
         </Link>
         <div className="flex items-center gap-6 text-sm">
-          <Link href="/servicios" className="text-ink-soft hover:text-ink">
+          <Link href="/servicios" className="text-ink-soft hover:text-ink transition-colors">
             Servicios
           </Link>
           <Link
             href="/contacto"
-            className="rounded-lg bg-brand px-4 py-2 font-medium text-surface hover:opacity-90"
+            className="btn-primario"
           >
             Contactar
           </Link>

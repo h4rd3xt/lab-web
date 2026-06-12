@@ -4,10 +4,26 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { servicios, buscarServicio } from "@/lib/servicios";
 import EsquemaFlujo from "@/components/EsquemaFlujo";
+import type { Metadata } from "next";
 
 // En el build, Next pre-genera una página estática por cada slug
 export function generateStaticParams() {
     return servicios.map((s) => ({ slug: s.slug }));
+}
+
+// Metadata dinámica: Next la llama una vez por slug, igual que a la página
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const servicio = buscarServicio(slug);
+  if (!servicio) return { title: "Servicio no encontrado" };
+  return {
+    title: servicio.nombre,   // la plantilla del layout añade el sufijo
+    description: servicio.claim,
+  };
 }
 
 export default async function PaginaServicio({
@@ -29,10 +45,10 @@ export default async function PaginaServicio({
                 ← servicios
             </Link>
 
-            <h1 className="mt-6 text-4xl font-bold tracking-tight">
+            <h1 className="mt-6 text-4xl font-bold tracking-tight text-balance">
                 {servicio.nombre}
             </h1>
-            <p className="mt-4 text-lg text-ink-soft">{servicio.descripcion}</p>
+            <p className="mt-4 text-lg text-ink-soft text-pretty">{servicio.descripcion}</p>
 
             {/* Beneficios como checklist */}
             <h2 className="mt-12 text-xl font-semibold">Qué consigues</h2>
@@ -60,7 +76,7 @@ export default async function PaginaServicio({
             </div>
             <Link
                 href="/contacto"
-                className="mt-12 inline-block rounded-lg bg-brand px-6 py-3 font-medium text-surface hover:opacity-90"
+                className="mt-12 inline-block btn-primario"
             >
                 Quiero esto en mi negocio
             </Link>

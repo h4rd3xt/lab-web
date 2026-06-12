@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Aviso Legal · Laboratorio Web",
+    title: "Aviso Legal",
     description: "Información legal, derechos y responsabilidad",
 };
 

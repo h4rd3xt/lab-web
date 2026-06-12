@@ -15,11 +15,42 @@
   --font-mono: var(--font-jetbrains), monospace;
 
   /* Jerarquía: fondo → panel → borde, de oscuro a claro */
-  --color-surface: #0b1120;      /* fondo principal */
-  --color-surface-soft: #141b2c; /* paneles y tarjetas */
-  --color-line: #28324d;         /* bordes */
-  --color-ink: #e8edf6;          /* texto principal */
-  --color-ink-soft: #a6b2c8;     /* texto secundario */
-  --color-ink-dim: #6f7d96;      /* texto atenuado */
-  --color-brand: #5ce1e6;        /* cian de marca */
+  --color-surface: #0b1120;
+  /* fondo principal */
+  --color-surface-soft: #141b2c;
+  /* paneles y tarjetas */
+  --color-line: #28324d;
+  /* bordes */
+  --color-ink: #e8edf6;
+  /* texto principal */
+  --color-ink-soft: #a6b2c8;
+  /* texto secundario */
+  --color-ink-dim: #6f7d96;
+  /* texto atenuado */
+  --color-danger: #f87171;
+  /* errores y avisos */
+  --color-success: #4ade80;
+  /* confirmaciones */
+  --color-brand: #5ce1e6;
+  /* cian de marca */
+}
+
+/* Opacidad al hacer hover en botones — cámbiala aquí para afectar a todos */
+:root {
+  --btn-hover-opacity: 0.60;
+}
+
+@layer components {
+  .btn-primario {
+    @apply rounded-lg bg-brand px-5 py-3 font-medium text-surface transition-opacity;
+    &:hover {
+      opacity: var(--btn-hover-opacity);
+    }
+  }
+}
+
+/* Anillo de foco para navegación por teclado, en toda la app */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }

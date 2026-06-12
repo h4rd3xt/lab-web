@@ -43,12 +43,12 @@ export default function FormularioSolicitud() {
         placeholder="Cuéntanos tu caso" rows={4} className={estiloInput} />
 
       <button type="submit" disabled={estado === "enviando"}
-        className="rounded-lg bg-brand px-5 py-3 font-semibold text-surface disabled:opacity-50">
+        className="rounded-lg cursor-pointer btn-primario">
         {estado === "enviando" ? "Enviando…" : "Enviar solicitud"}
       </button>
 
-      {estado === "exito" && <p className="text-brand">Recibida — gracias.</p>}
-      {estado === "error" && <p className="text-red-400">Algo falló. Inténtalo de nuevo.</p>}
+      {estado === "exito" && <p className="text-success">Recibida — gracias.</p>}
+      {estado === "error" && <p className="text-danger">Algo falló. Inténtalo de nuevo.</p>}
     </form>
   );
 }

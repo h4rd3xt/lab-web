@@ -31,10 +31,10 @@ export default function Home() {
         <p className="font-mono text-sm tracking-widest text-brand uppercase">
           consultoría tecnológica
         </p>
-        <h1 className="mx-auto mt-4 max-w-2xl text-5xl font-bold tracking-tight">
+        <h1 className="mx-auto mt-4 max-w-2xl text-balance text-4xl font-bold tracking-tight md:text-6xl">
           Tecnología que trabaja por tu negocio
         </h1>
-        <p className="mx-auto mt-6 max-w-xl text-lg text-ink-soft">
+        <p className="mx-auto mt-6 max-w-xl text-lg text-ink-soft text-pretty">
           Automatización, gestión de datos y modernización web con
           herramientas actuales. Sin humo: todo lo que ofrecemos funciona
           en esta misma web.
@@ -42,7 +42,7 @@ export default function Home() {
         <div className="mt-8 flex justify-center gap-4">
           <Link
             href="/contacto"
-            className="rounded-lg bg-brand px-6 py-3 font-medium text-surface hover:opacity-90"
+            className="btn-primario"
           >
             Cuéntanos tu caso
           </Link>
@@ -82,7 +82,7 @@ export default function Home() {
         </p>
         <Link
           href="/contacto"
-          className="mt-6 inline-block rounded-lg bg-brand px-6 py-3 font-medium text-surface hover:opacity-90"
+          className="mt-6 inline-block btn-primario"
         >
           Ir al formulario
         </Link>

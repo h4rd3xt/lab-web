@@ -4,7 +4,7 @@ import FormularioSolicitud from "@/components/FormularioSolicitud";
 
 // metadata de página: Next lo combina con el del layout raíz
 export const metadata: Metadata = {
-    title: "Contacto · Laboratorio Web",
+    title: "Contacto",
     description: "Cuéntanos tu caso y te respondemos en menos de 24 h.",
 };
 
@@ -14,14 +14,13 @@ export default function PaginaContacto() {
             <p className="font-mono text-sm tracking-widest text-brand uppercase">
                 contacto
             </p>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight">
+            <h1 className="mt-3 text-4xl font-bold tracking-tight text-balance">
                 Cuéntanos tu caso
             </h1>
-            <p className="mt-4 text-lg text-ink-soft">
+            <p className="mt-4 text-lg text-ink-soft text-pretty">
                 Describe el proceso que quieres mejorar y te respondemos con una
                 propuesta concreta en menos de 24 horas.
             </p>
-
             <FormularioSolicitud />
         </main>
     );

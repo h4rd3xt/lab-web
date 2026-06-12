@@ -62,7 +62,7 @@ export default function Panel() {
           <button className="w-full rounded-lg bg-brand p-3 font-semibold text-surface">
             Entrar
           </button>
-          {error && <p className="text-red-400">{error}</p>}
+          {error && <p className="text-danger">{error}</p>}
         </form>
       </main>
     );
