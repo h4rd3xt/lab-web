@@ -1,89 +1,92 @@
-import React from "react";
-import FormularioSolicitud from "@/components/FormularioSolicitud";
-
-// Provide a minimal JSX.IntrinsicElements declaration to satisfy TS when
-// project-level JSX typings are not available in this environment.
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [elemName: string]: any;
-    }
-  }
-}
+// app/page.tsx — portada pública (Server Component)
 import Link from "next/link";
 
-type Departamento = {
-  numero: number;
-  nombre: string;
-  tecnologia: string;
-  estado: "funcionando" | "pendiente";
-  href?: string;
-};
-
-const departamentos: Departamento[] = [
-  { numero: 1, nombre: "Entorno de desarrollo", tecnologia: "VSCode + Git/GitHub", estado: "funcionando" },
-  { numero: 2, nombre: "Frontend", tecnologia: "Next.js + React + Tailwind", estado: "funcionando" },
-  { numero: 3, nombre: "Infraestructura", tecnologia: "Vercel", estado: "funcionando" },
-  { numero: 4, nombre: "Backend y datos", tecnologia: "Supabase", estado: "funcionando", href: "/contacto" },
-  { numero: 5, nombre: "Comunicaciones", tecnologia: "Resend", estado: "funcionando" },
+// Pasos del proceso: solo los usa la home, por eso viven aquí y no en lib/
+const proceso = [
+  {
+    numero: "01",
+    titulo: "Auditoría",
+    detalle:
+      "Analizamos tus procesos actuales y localizamos dónde pierdes tiempo: tareas repetitivas, datos dispersos, herramientas obsoletas.",
+  },
+  {
+    numero: "02",
+    titulo: "Implementación",
+    detalle:
+      "Construimos la solución con herramientas actuales y te la entregamos funcionando, con formación incluida para tu equipo.",
+  },
+  {
+    numero: "03",
+    titulo: "Mantenimiento",
+    detalle:
+      "Acompañamiento continuo: mejoras, soporte y evolución de la solución según crece tu negocio.",
+  },
 ];
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-20">
-      <p className="font-mono text-sm tracking-widest text-brand uppercase">
-        // laboratorio-web
-      </p>
-      <h1 className="mt-3 text-4xl font-bold tracking-tight">
-        El stack está vivo
-      </h1>
-      <p className="mt-4 text-lg text-ink-soft">
-        Los departamentos 1, 2 y 4 ya funcionan. Iremos encendiendo el resto.
-      </p>
+    <main className="mx-auto max-w-5xl px-6">
+      {/* ───── Hero: propuesta de valor ───── */}
+      <section className="py-24 text-center">
+        <p className="font-mono text-sm tracking-widest text-brand uppercase">
+          consultoría tecnológica
+        </p>
+        <h1 className="mx-auto mt-4 max-w-2xl text-5xl font-bold tracking-tight">
+          Tecnología que trabaja por tu negocio
+        </h1>
+        <p className="mx-auto mt-6 max-w-xl text-lg text-ink-soft">
+          Automatización, gestión de datos y modernización web con
+          herramientas actuales. Sin humo: todo lo que ofrecemos funciona
+          en esta misma web.
+        </p>
+        <div className="mt-8 flex justify-center gap-4">
+          <Link
+            href="/contacto"
+            className="rounded-lg bg-brand px-6 py-3 font-medium text-surface hover:opacity-90"
+          >
+            Cuéntanos tu caso
+          </Link>
+          <Link
+            href="/servicios"
+            className="rounded-lg border border-line px-6 py-3 font-medium text-ink-soft hover:text-ink"
+          >
+            Ver servicios
+          </Link>
+        </div>
+      </section>
 
-      {/* Lista renderizada con .map(). Los deptos con href son clicables. */}
-      <ul className="mt-12 space-y-3">
-        {departamentos.map((depto) => {
-          const card = (
-            <div className="flex items-center gap-4 rounded-xl border border-line bg-surface-soft p-4">
-              <span className="grid h-10 w-10 place-items-center rounded-lg border border-line font-mono text-brand">
-                {depto.numero}
-              </span>
-              <div className="flex-1">
-                <p className="font-semibold">{depto.nombre}</p>
-                <p className="font-mono text-sm text-ink-dim">{depto.tecnologia}</p>
-              </div>
-              <span
-                className={
-                  depto.estado === "funcionando"
-                    ? "rounded-full bg-brand/10 px-3 py-1 font-mono text-xs text-brand"
-                    : "rounded-full border border-line px-3 py-1 font-mono text-xs text-ink-dim"
-                }
-              >
-                {depto.estado === "funcionando" ? "✓ funcionando" : "pendiente"}
-              </span>
+      {/* ───── Cómo trabajamos: proceso en 3 pasos ───── */}
+      <section className="border-t border-line py-24">
+        <h2 className="text-2xl font-bold tracking-tight">Cómo trabajamos</h2>
+        <div className="mt-8 grid gap-10 md:grid-cols-3">
+          {proceso.map((paso) => (
+            <div key={paso.numero}>
+              <p className="font-mono text-5xl font-bold text-line">
+                {paso.numero}
+              </p>
+              <h3 className="mt-3 font-semibold">{paso.titulo}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                {paso.detalle}
+              </p>
             </div>
-          );
+          ))}
+        </div>
+      </section>
 
-          return (
-            <li key={depto.numero}>
-              {depto.href ? (
-                <Link href={depto.href} className="block hover:opacity-80">
-                  {card}
-                </Link>
-              ) : (
-                card
-              )}
-            </li>
-          );
-        })}
-      </ul>
-
-      <FormularioSolicitud />
-
-      <footer className="mt-16 border-t border-line pt-6 font-mono text-sm text-ink-dim">
-        Siguiente parada: emails de confirmación con Resend.
-      </footer>
+      {/* ───── CTA final ───── */}
+      <section className="mb-24 rounded-xl border border-line bg-surface-soft p-10 text-center">
+        <h2 className="text-2xl font-bold">¿Hablamos de tu proyecto?</h2>
+        <p className="mx-auto mt-3 max-w-md text-ink-soft">
+          Cuéntanos qué proceso te quita tiempo y te proponemos cómo
+          automatizarlo.
+        </p>
+        <Link
+          href="/contacto"
+          className="mt-6 inline-block rounded-lg bg-brand px-6 py-3 font-medium text-surface hover:opacity-90"
+        >
+          Ir al formulario
+        </Link>
+      </section>
     </main>
   );
 }
