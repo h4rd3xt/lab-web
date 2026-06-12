@@ -10,19 +10,19 @@ export default function FormularioSolicitud() {
   const [estado, setEstado] = useState<"inicial" | "enviando" | "exito" | "error">("inicial");
 
   async function enviar(e: React.SubmitEvent) {
-    e.preventDefault(); // sin esto, el navegador recargaría la página
+    e.preventDefault();
     setEstado("enviando");
-    const res = await fetch("/api/solicitudes", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nombre, email, mensaje }),
-    });
-
-    if (!res.ok) {
-      setEstado("error");
-    } else {
+    try {
+      const res = await fetch("/api/solicitudes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, email, mensaje }),
+      });
+      if (!res.ok) throw new Error(`El servidor respondió ${res.status}`);
       setEstado("exito");
       setNombre(""); setEmail(""); setMensaje("");
+    } catch {
+      setEstado("error"); // red caída O error del servidor: mismo destino
     }
   }
 
@@ -33,13 +33,16 @@ export default function FormularioSolicitud() {
     <form onSubmit={enviar} className="mt-16 space-y-4 rounded-xl border border-line bg-surface-soft p-6">
       <h2 className="text-xl font-bold">Solicita una cita</h2>
 
-      <input value={nombre} onChange={(e) => setNombre(e.target.value)}
+      <label htmlFor="nombre" className="sr-only">Nombre</label>
+      <input id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)}
         placeholder="Nombre *" required className={estiloInput} />
 
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+      <label htmlFor="email" className="sr-only">Email</label>
+      <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
         placeholder="Email *" required className={estiloInput} />
 
-      <textarea value={mensaje} onChange={(e) => setMensaje(e.target.value)}
+      <label htmlFor="mensaje" className="sr-only">Mensaje</label>
+      <textarea id="mensaje" value={mensaje} onChange={(e) => setMensaje(e.target.value)}
         placeholder="Cuéntanos tu caso" rows={4} className={estiloInput} />
 
       <button type="submit" disabled={estado === "enviando"}
