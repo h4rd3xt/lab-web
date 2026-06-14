@@ -32,12 +32,11 @@ export default function Home() {
           consultoría tecnológica
         </p>
         <h1 className="mx-auto mt-4 max-w-2xl text-balance text-4xl font-bold tracking-tight md:text-6xl">
-          Tecnología que trabaja por tu negocio
+          Tecnología que trabaja para tu empresa
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-lg text-ink-soft text-pretty">
           Automatización, gestión de datos y modernización web con
-          herramientas actuales. Sin humo: todo lo que ofrecemos funciona
-          en esta misma web.
+          herramientas actuales.
         </p>
         <div className="mt-8 flex justify-center gap-4">
           <Link

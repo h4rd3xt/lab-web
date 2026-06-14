@@ -1,43 +1,65 @@
-# CLAUDE.md — laboratorio-web
+# CLAUDE.md
 
-## Qué es este proyecto
+Contexto para el asistente de IA al trabajar en este repositorio. Mantener conciso y actualizado.
 
-Laboratorio de aprendizaje fullstack de José, con doble propósito: (1) campo de pruebas técnico y (2) semilla de una consultora tecnológica cuyo caso 0 es la gestión de un gabinete psicopedagógico (futuro SaaS vertical). No es un proyecto desechable: las decisiones se toman como si fuera a producción real.
+## Qué es
 
-## Cómo trabajar con José (IMPORTANTE)
-
-- **Está aprendiendo.** Antes de dar código, explica el concepto y el porqué. Si aparece un nombre nuevo (hook, middleware, ORM...), explica qué significa y de dónde viene.
-- **Él teclea.** Propón código y cambios; NO edites archivos sin que lo pida explícitamente. El objetivo es que aprenda, no terminar rápido.
-- **Paso a paso.** Un bloque cada vez, con verificación al final de cada paso.
-- **Siempre en español**, incluidos comentarios del código.
-- Si comete un error, guíale a depurarlo (leer el log, partir el problema) antes de dar la solución.
+`laboratorio-web` (lab-web): web de una consultora tecnológica que **se demuestra a sí misma** — cada servicio que ofrece lo usa la propia web en producción (el formulario = automatización, el panel = gestión de datos, el despliegue continuo = modernización web). Desplegada en Vercel. Proyecto con fines didácticos.
 
 ## Stack
 
-- **Next.js 16** (App Router, TypeScript estricto, Turbopack)
-- **Tailwind 4** — sin `tailwind.config.js`: tokens en `@theme` dentro de `app/globals.css`
-- **Supabase** — PostgreSQL + Auth + RLS. Claves nuevas (`sb_publishable_...` / `sb_secret_...`)
-- **Resend** — email transaccional, en modo prueba (sin dominio: solo envía al email de la cuenta)
-- **Vercel** — deploy continuo desde GitHub (`main` → producción)
+- Next.js 16 (App Router) + React 19 + TypeScript (modo `strict`)
+- Tailwind CSS v4 — **sin** `tailwind.config.js`; el tema vive en `app/globals.css` con `@theme`
+- Supabase (`@supabase/supabase-js`): PostgreSQL + Auth + RLS
+- Resend: envío de emails
+- Alias de imports: `@/*` → raíz del proyecto
 
-## Arquitectura actual
+## Comandos
 
-- `/` — página pública (Server Component) con formulario de solicitudes (`components/FormularioSolicitud.tsx`, "use client")
-- El formulario hace `fetch POST /api/solicitudes` → route handler (`app/api/solicitudes/route.ts`): valida → INSERT en Supabase → email de aviso vía Resend (con `replyTo` del cliente)
-- `/panel` — login con Supabase Auth (password; usuario creado a mano, sin registro público) + lista de solicitudes
-- `lib/supabase.ts` — cliente compartido (clave publishable)
-- Tabla `solicitudes` con RLS: INSERT para `anon`, SELECT para `authenticated`, nada más
-- Patrón de referencia: HUMANO → WEB (React) → FUNCTION (Vercel) → { SUPABASE + RESEND }
+- `npm run dev` — desarrollo en http://localhost:3000
+- `npm run build` — build de producción
+- `npm start` — sirve el build de producción
 
-## Comandos y entorno
+## Arquitectura
 
-- `npm run dev` / `npm run build` (pasar build en local antes de push)
-- Variables de entorno en DOS sitios: `.env.local` (local) y panel de Vercel (producción). Las tres: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `RESEND_API_KEY` (esta última, secreto: solo servidor)
-- José trabaja desde 2 ordenadores: flujo clone/pull → npm install → dev
+- Rutas en `app/` (App Router): cada carpeta con `page.tsx` es una URL.
+- Por defecto los componentes son **Server Components**. Solo llevan `"use client"` los que necesitan estado/interacción: `components/FormularioSolicitud.tsx` y `app/panel/page.tsx`.
+- Datos de los servicios centralizados en `lib/servicios.ts` (fuente única de datos). La ruta dinámica `app/servicios/[slug]/page.tsx` se pre-genera por slug con `generateStaticParams`.
+- Cliente Supabase único en `lib/supabase.ts` (usa la clave *publishable*, pública; todo pasa por RLS).
+- Flujo del formulario: `FormularioSolicitud` → `POST /api/solicitudes` → insert en la tabla `solicitudes` (Supabase) → email con Resend → visible en `/panel` tras login.
 
 ## Convenciones
 
-- Tipos React 19: `React.SubmitEvent` (no `FormEvent`, obsoleto)
-- Nombres de variables, componentes y tablas en español
-- `docs/chuleta.md` — referencia de conceptos aprendidos y errores ya depurados
-- Cambios de esquema SQL: por ahora vía SQL Editor de Supabase (pendiente: migraciones con CLI)
+- **Idioma: todo en español** — código, nombres de archivos, funciones y variables, y comentarios (`Encabezado`, `Pie`, `buscarServicio`, `enviar`...). Mantenerlo.
+- Comentarios didácticos: el proyecto explica los conceptos a medida que aparecen; al añadir código, comentar en el mismo tono cuando aporte valor.
+- Estilos solo con clases de Tailwind y los tokens del tema (`bg-surface`, `text-ink`, `text-brand`, `border-line`...). Nada de CSS suelto salvo en `globals.css`.
+- En el App Router, `params` es una `Promise` (Next 15+): hay que hacer `await params`.
+- Validar **siempre** en el servidor (la API valida aunque el navegador ya lo haga).
+
+## Variables de entorno (`.env.local`, NO se sube al repo)
+
+- `NEXT_PUBLIC_SUPABASE_URL` — URL del proyecto Supabase
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — clave pública de Supabase
+- `RESEND_API_KEY` — secreto; solo se usa en la función serverless de la API
+
+El prefijo `NEXT_PUBLIC_` expone la variable al navegador; sin él, solo es accesible en el servidor.
+
+## Mapa de archivos
+
+```
+app/
+  layout.tsx              Layout raíz (<html>/<body>, fuentes, Encabezado y Pie)
+  page.tsx                Home
+  globals.css             Tailwind v4 + tokens del tema (@theme)
+  servicios/page.tsx      Índice de servicios
+  servicios/[slug]/page.tsx  Detalle de servicio (ruta dinámica)
+  contacto/page.tsx       Formulario de contacto
+  panel/page.tsx          Login + listado de solicitudes (client)
+  aviso-legal/, privacidad/  Páginas legales
+  api/solicitudes/route.ts   Endpoint POST del formulario
+components/
+  Encabezado.tsx, Pie.tsx, FormularioSolicitud.tsx, EsquemaFlujo.tsx
+lib/
+  supabase.ts             Cliente Supabase
+  servicios.ts            Datos de los servicios + buscarServicio()
+```

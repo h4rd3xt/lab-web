@@ -1,58 +1,69 @@
 # laboratorio-web
 
-Campo de pruebas del stack serverless con BaaS: **Next.js 16 + TypeScript + Tailwind 4**, con GitHub, Vercel, Supabase y Resend en el horizonte. Aquí se practica todo lo que una web actual necesita antes de aplicarlo a proyectos reales de la consultora.
+Web de consultoría tecnológica construida con Next.js. El proyecto **se demuestra a sí mismo**: cada servicio que presenta —automatización, gestión de datos y modernización web— está implementado en la propia web y funcionando en producción.
 
-## Requisitos
+> Proyecto de aprendizaje de desarrollo web full-stack.
 
-Node.js **20.9 o superior** (compruébalo con `node -v`).
+## Características
 
-## Primer arranque
+- Páginas de servicios con **rutas dinámicas** generadas desde una única fuente de datos.
+- **Formulario de contacto** que guarda las solicitudes en base de datos y envía un email de aviso.
+- **Panel privado** con autenticación para consultar las solicitudes recibidas.
+- Diseño oscuro y responsive con Tailwind CSS.
 
-Abre esta carpeta en VSCode, abre su terminal integrada (`Ctrl + ñ`) y ejecuta:
+## Stack
+
+- [Next.js 16](https://nextjs.org/) (App Router) + React 19 + TypeScript
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Supabase](https://supabase.com/) — PostgreSQL, autenticación y RLS
+- [Resend](https://resend.com/) — envío de emails
+- Despliegue en [Vercel](https://vercel.com/)
+
+## Requisitos previos
+
+- Node.js 20 o superior (LTS recomendada)
+- Una cuenta de [Supabase](https://supabase.com/) y otra de [Resend](https://resend.com/) para las funciones de base de datos y email
+
+## Instalación
 
 ```bash
-npm install   # descarga las dependencias a node_modules (1 sola vez)
-npm run dev   # arranca el servidor de desarrollo
+git clone <url-del-repositorio>
+cd lab-web
+npm install
 ```
 
-Visita **http://localhost:3000**. Si ves la página del stack, los departamentos 1 y 2 funcionan. El servidor se detiene con `Ctrl + C`.
+## Variables de entorno
 
-Prueba el ciclo completo: edita un texto en `app/page.tsx`, guarda, y mira el navegador — se actualiza solo (hot reload).
+Crea un archivo `.env.local` en la raíz del proyecto con tus propias claves:
 
-## Estructura
-
-```
-laboratorio-web/
-├── app/                  ← tu aplicación (App Router)
-│   ├── layout.tsx        ← layout raíz: envuelve todas las páginas (<html>, <body>)
-│   ├── page.tsx          ← la página de inicio (ruta "/")
-│   └── globals.css       ← entrada de Tailwind + tokens de color de marca
-├── package.json          ← identidad del proyecto: dependencias y scripts
-├── tsconfig.json         ← configuración de TypeScript
-├── next.config.ts        ← configuración de Next.js
-├── postcss.config.mjs    ← conecta Tailwind al build
-├── .env.example          ← plantilla de secretos (la real será .env.local)
-└── .gitignore            ← lo que NUNCA sube al repo: node_modules, .env*
+```bash
+NEXT_PUBLIC_SUPABASE_URL=tu_url_de_supabase
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=tu_clave_publishable
+RESEND_API_KEY=tu_clave_de_resend
 ```
 
-Carpetas que aparecerán solas y no se tocan: `node_modules/` (dependencias), `.next/` (build de desarrollo). Ambas están en `.gitignore`.
+> `.env.local` está incluido en `.gitignore`: nunca se sube al repositorio.
 
-## Scripts
+## Uso
 
-| Comando         | Qué hace                                          |
-| --------------- | ------------------------------------------------- |
-| `npm run dev`   | Servidor de desarrollo con hot reload (Turbopack) |
-| `npm run build` | Compila la versión optimizada de producción       |
-| `npm start`     | Sirve esa versión de producción en local          |
+```bash
+npm run dev      # desarrollo en http://localhost:3000
+npm run build    # build de producción
+npm start        # sirve el build de producción
+```
 
-## Hoja de ruta (los 5 departamentos)
+## Estructura del proyecto
 
-1. ✅ **Entorno** — VSCode + Git/GitHub → siguiente paso: `git init` y primer push
-2. ✅ **Frontend** — Next.js + React + Tailwind → migrar el doc de arquitectura a componentes
-3. ⬜ **Infraestructura** — conectar el repo a Vercel → deploy automático con cada push
-4. ⬜ **Backend y datos** — Supabase: formulario de contacto que escriba en PostgreSQL (con RLS)
-5. ⬜ **Comunicaciones** — Resend: email de confirmación desde una serverless function
+```
+app/            Rutas (App Router): home, servicios, contacto, panel y API
+components/     Componentes reutilizables (cabecera, pie, formulario, esquema)
+lib/            Lógica compartida: cliente de Supabase y datos de los servicios
+```
 
-## Regla de oro
+## Despliegue
 
-Los secretos viven en `.env.local` (no existe aún; se crea copiando `.env.example`). Ese archivo está en `.gitignore` y **jamás se sube al repo**. En producción, los secretos se configuran en el panel de Vercel.
+Pensado para [Vercel](https://vercel.com/): conecta el repositorio, define las variables de entorno en el panel del proyecto y cada `git push` a la rama principal genera un despliegue automático.
+
+## Licencia
+
+Distribuido bajo la licencia [MIT](LICENSE).
