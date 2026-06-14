@@ -55,6 +55,21 @@ export const servicios: Servicio[] = [
         tecnologia: "Next.js + Vercel",
         flujo: ["git push", "GitHub", "Build en Vercel", "Producción"],
     },
+    {
+        slug: "analisis-datos",
+        nombre: "Análisis de datos",
+        claim: "Convierte tus datos en decisiones, no en hojas sueltas.",
+        descripcion:
+            "Transformamos datos dispersos en paneles claros: los indicadores que de verdad usas para decidir, actualizados solos y accesibles desde cualquier dispositivo.",
+        beneficios: [
+            "Indicadores clave (KPIs) de un vistazo",
+            "Informes que se actualizan solos",
+            "Detección de tendencias y anomalías",
+        ],
+        // KPI = Key Performance Indicator: una métrica que mide si vas bien.
+        tecnologia: "PostgreSQL + SQL + paneles a medida",
+        flujo: ["Datos en bruto", "Consultas SQL", "Agregación", "Panel de decisión"],
+    },
 ];
 
 // Búsqueda por slug; devuelve undefined si no existe (lo usará la página de detalle)

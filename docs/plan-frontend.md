@@ -55,15 +55,15 @@ Antes de montar páginas, creamos las piezas reutilizables para que todo sea coh
 
 Montamos la portada sección a sección, cada una como su propio componente, reutilizando los ladrillos de la Fase 0. Orden sugerido:
 
-- [ ] **Hero** pulido: eyebrow + titular grande + **palabra rotativa** (animación que cambia una palabra cada pocos segundos) + 2 CTAs + 3 mini-argumentos + panel visual con motivos de código.
-- [ ] **Marquee**: cinta horizontal de palabras clave que se desplaza en bucle.
-- [ ] **Enfoque** + 2 `Stat` grandes (tipo "+40%", "3×").
-- [ ] **Proceso**: evolucionar tus 3 pasos actuales al formato numerado (puedes mantener 3 o pasar a 4).
-- [ ] **Servicios** (preview): 3 tarjetas + enlace a `/servicios` (ya tienes la base).
-- [ ] **Proyectos** (preview): 2-3 tarjetas destacadas + enlace a `/proyectos`.
-- [ ] **Testimonios**: tarjetas con cita, avatar (iniciales), nombre y cargo.
-- [ ] **Stack tecnológico**: agrupado por categoría (Frontend, Backend, etc.).
-- [ ] **CTA final**: bloque de cierre con botón y badges de disponibilidad.
+- [x] **Hero** pulido: eyebrow + titular grande + **palabra rotativa** (animación que cambia una palabra cada pocos segundos) + 2 CTAs + 3 mini-argumentos + panel visual (gráfica de tendencia en SVG).
+- [x] **Marquee**: cinta horizontal de palabras clave que se desplaza en bucle.
+- [x] **Enfoque** + 2 `Stat` grandes (tipo "+40%", "3×").
+- [x] **Proceso**: evolucionar tus 3 pasos actuales al formato numerado (puedes mantener 3 o pasar a 4).
+- [x] **Servicios** (preview): 3 tarjetas + enlace a `/servicios` (ya tienes la base).
+- [x] **Proyectos** (preview): 2-3 tarjetas destacadas + enlace a `/proyectos`.
+- [x] **Testimonios**: tarjetas con cita, avatar (iniciales), nombre y cargo.
+- [x] **Stack tecnológico**: agrupado por categoría (Frontend, Backend, etc.).
+- [x] **CTA final**: bloque de cierre con botón y badges de disponibilidad.
 
 **Resultado:** una home a la altura de Norvy, con tu identidad oscura.
 

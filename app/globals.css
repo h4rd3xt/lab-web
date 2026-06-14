@@ -106,12 +106,34 @@
   animation: dibujar-linea 1.6s ease-out forwards;
 }
 
+/* Aparición al hacer scroll (scroll reveal): el contenido empieza
+ * desvanecido y un poco más abajo, y al hacerse visible sube y se aclara.
+ * Usamos `transition` (no @keyframes) porque solo cambiamos entre dos
+ * estados (oculto ↔ visible) que controla el JavaScript con la clase. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* Accesibilidad: si el usuario pide menos movimiento en su sistema,
- * desactivamos las animaciones decorativas. */
+ * desactivamos las animaciones decorativas y mostramos todo directamente. */
 @media (prefers-reduced-motion: reduce) {
   .animar-entrada-palabra,
   .marquee-pista,
   .animar-linea {
     animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

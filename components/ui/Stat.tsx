@@ -1,9 +1,12 @@
+import type { ReactNode } from "react";
+
 // Stat: métrica de prueba social (número grande + descripción).
+// `valor` admite texto o un componente (p. ej. <NumeroAnimado />).
 export default function Stat({
   valor,
   descripcion,
 }: {
-  valor: string;
+  valor: ReactNode;
   descripcion: string;
 }) {
   return (

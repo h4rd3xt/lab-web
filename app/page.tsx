@@ -1,35 +1,46 @@
 // app/page.tsx — portada pública (Server Component)
-import Link from "next/link";
 import Hero from "@/components/home/Hero";
 import Marquee from "@/components/home/Marquee";
+import Enfoque from "@/components/home/Enfoque";
+import Proceso from "@/components/home/Proceso";
+import ServiciosPreview from "@/components/home/ServiciosPreview";
+import ProyectosPreview from "@/components/home/ProyectosPreview";
+import Testimonios from "@/components/home/Testimonios";
+import Stack from "@/components/home/Stack";
+import CtaFinal from "@/components/home/CtaFinal";
+import Reveal from "@/components/home/Reveal";
 
 export default function Home() {
   return (
     <>
-      {/* ───── Hero + Marquee (Bloque 1) ───── */}
-      {/* El Hero va dentro del contenedor centrado; el Marquee es de ancho
-          completo, por eso lo sacamos del <main> con su propio margen. */}
       <main className="mx-auto max-w-5xl px-6">
-        <Hero />
+        <Reveal>
+          <Hero />
+        </Reveal>
       </main>
-
       <Marquee />
-
       <main className="mx-auto max-w-5xl px-6">
-      {/* ───── CTA final ───── */}
-      <section className="my-24 rounded-xl border border-line bg-surface-soft p-10 text-center">
-        <h2 className="text-2xl font-bold">¿Hablamos de tu proyecto?</h2>
-        <p className="mx-auto mt-3 max-w-md text-ink-soft">
-          Cuéntanos qué proceso te quita tiempo y te proponemos cómo
-          automatizarlo.
-        </p>
-        <Link
-          href="/contacto"
-          className="mt-6 inline-block btn-primario"
-        >
-          Ir al formulario
-        </Link>
-      </section>
+        <Reveal>
+          <Enfoque />
+        </Reveal>
+        <Reveal>
+          <Proceso />
+        </Reveal>
+        <Reveal>
+          <ServiciosPreview />
+        </Reveal>
+        <Reveal>
+          <ProyectosPreview />
+        </Reveal>
+        <Reveal>
+          <Testimonios />
+        </Reveal>
+        <Reveal>
+          <Stack />
+        </Reveal>
+        <Reveal>
+          <CtaFinal />
+        </Reveal>
       </main>
     </>
   );
