@@ -40,12 +40,12 @@ Antes de montar páginas, creamos las piezas reutilizables para que todo sea coh
 
 ## Fase 1 — Navegación y estructura multipágina
 
-- [ ] Ampliar `Encabezado` con los enlaces nuevos: Inicio · Servicios · Proyectos · Mantenimiento · Contacto + CTA.
-- [ ] Añadir el **menú móvil** (hamburguesa): un componente cliente (`"use client"`) con estado abierto/cerrado, como el "Abrir menú" de Norvy.
-- [ ] Revisar/ampliar el `Pie` (footer) con las nuevas secciones y datos de contacto.
-- [ ] Crear los esqueletos navegables de las rutas nuevas (páginas mínimas, aún sin contenido final):
-  - [ ] `/proyectos` y `/proyectos/[slug]`
-  - [ ] `/mantenimiento`
+- [x] Ampliar `Encabezado` con los enlaces nuevos: Inicio · Servicios · Proyectos · Mantenimiento · Contacto + CTA.
+- [x] Añadir el **menú móvil** (hamburguesa): un componente cliente (`"use client"`) con estado abierto/cerrado, como el "Abrir menú" de Norvy.
+- [x] Revisar/ampliar el `Pie` (footer) con las nuevas secciones y datos de contacto.
+- [x] Crear los esqueletos navegables de las rutas nuevas (páginas mínimas, aún sin contenido final):
+  - [x] `/proyectos` y `/proyectos/[slug]`
+  - [x] `/mantenimiento`
 
 **Resultado:** puedes navegar por todo el sitio aunque las páginas estén "en bruto". Así trabajamos sin enlaces rotos.
 
