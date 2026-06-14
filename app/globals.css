@@ -54,3 +54,64 @@
   outline: 2px solid var(--color-brand);
   outline-offset: 2px;
 }
+
+/* ───── Animaciones de la home ─────
+ * Un @keyframes describe los "fotogramas" de una animación: de cómo empieza
+ * (from / 0%) a cómo termina (to / 100%). El navegador rellena lo de en medio.
+ */
+
+/* Entrada de la palabra rotativa del hero: aparece desde abajo, desvanecida. */
+@keyframes entrada-palabra {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animar-entrada-palabra {
+  animation: entrada-palabra 0.5s ease-out;
+}
+
+/* Desplazamiento continuo del marquee: mueve la pista media anchura a la
+ * izquierda. Como la lista está duplicada, al llegar al -50% se ve idéntico
+ * al inicio y el bucle parece infinito. */
+@keyframes desplazar-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-pista {
+  animation: desplazar-marquee 30s linear infinite;
+}
+
+/* Dibujado de la línea de la gráfica: la línea "se traza" de izquierda a
+ * derecha. Truco: con pathLength="1" la longitud total es 1; empezamos con
+ * el trazo desplazado 1 (invisible) y lo llevamos a 0 (completo). */
+@keyframes dibujar-linea {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.animar-linea {
+  stroke-dasharray: 1;
+  animation: dibujar-linea 1.6s ease-out forwards;
+}
+
+/* Accesibilidad: si el usuario pide menos movimiento en su sistema,
+ * desactivamos las animaciones decorativas. */
+@media (prefers-reduced-motion: reduce) {
+  .animar-entrada-palabra,
+  .marquee-pista,
+  .animar-linea {
+    animation: none;
+  }
+}

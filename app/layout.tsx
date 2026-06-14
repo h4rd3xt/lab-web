@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · Laboratorio Web",
   },
   description:
-    "Automatización, gestión de datos y modernización web. Sin humo: todo funciona en esta misma web.",
+    "Automatización, gestión de datos y modernización web.",
   openGraph: {
     title: "Laboratorio Web",
     description: "Automatización, gestión de datos y modernización web.",
