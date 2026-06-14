@@ -6,7 +6,7 @@ const proceso = [
   {
     numero: "01",
     titulo: "Auditoría",
-    detalle:
+    detalle:  
       "Analizamos tus procesos actuales y localizamos dónde pierdes tiempo: tareas repetitivas, datos dispersos, herramientas obsoletas.",
   },
   {
