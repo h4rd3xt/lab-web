@@ -32,7 +32,7 @@ Antes de montar páginas, creamos las piezas reutilizables para que todo sea coh
   - [x] `Etiqueta` (badge/tag) — para categorías y tecnologías.
   - [x] `Stat` — número grande + descripción (las métricas de prueba social).
   - [x] `Checklist` — lista de beneficios con ✓.
-- [ ] Definir los archivos de datos nuevos en `lib/`: `proyectos.ts`, `testimonios.ts`, `stack.ts`, `proceso.ts` (con sus tipos TypeScript, como en `servicios.ts`).
+- [x] Definir los archivos de datos nuevos en `lib/`: `proyectos.ts`, `testimonios.ts`, `stack.ts`, `proceso.ts` (con sus tipos TypeScript, como en `servicios.ts`).
 
 **Resultado:** una caja de herramientas visual lista para ensamblar páginas rápido y sin incoherencias.
 
